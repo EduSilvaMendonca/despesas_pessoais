@@ -19,7 +19,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+
   final _transactions = [
     Transaction(
       id: 't1',
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return TransactionForm(null);
+        return TransactionForm(_addTransaction);
       },
     );
   }
