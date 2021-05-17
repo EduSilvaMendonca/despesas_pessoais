@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart_bar.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -14,19 +15,16 @@ class Chart extends StatelessWidget {
       );
 
       double totalSum = 0.0;
-      
-      for(var i = 0; i < recentTransactions.length; i++) {
+
+      for (var i = 0; i < recentTransactions.length; i++) {
         bool sameDay = recentTransactions[i].date.day == weekDay.day;
         bool sameMonth = recentTransactions[i].date.month == weekDay.month;
         bool sameYear = recentTransactions[i].date.year == weekDay.year;
 
-        if(sameDay && sameMonth && sameYear) {
+        if (sameDay && sameMonth && sameYear) {
           totalSum += recentTransactions[i].value;
         }
       }
-
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
 
       return {
         'day': DateFormat.E().format(weekDay)[0],
@@ -42,7 +40,13 @@ class Chart extends StatelessWidget {
       elevation: 6,
       margin: EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: groupedTransactions.map((tr) {
+          return ChartBar(
+            label: tr['day'],
+            value: tr['value'],
+            percentage: 0,
+          );
+        }).toList(),
       ),
     );
   }
